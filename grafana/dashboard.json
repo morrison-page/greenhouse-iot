@@ -5,8 +5,8 @@
     "name": "adkm25w",
     "namespace": "default",
     "uid": "398dff0d-8576-472d-a1f4-36b7f06ff2a2",
-    "resourceVersion": "1776875893903014",
-    "generation": 8,
+    "resourceVersion": "1776879703178992",
+    "generation": 16,
     "creationTimestamp": "2026-04-22T15:49:43Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "2345540785037312"
@@ -14,10 +14,9 @@
     "annotations": {
       "grafana.app/createdBy": "user:bfjlc9fp5vn5sa",
       "grafana.app/folder": "",
-      "grafana.app/message": "Added refresh to default to every 5 seconds",
       "grafana.app/saved-from-ui": "Grafana v13.0.1 (a100054f)",
       "grafana.app/updatedBy": "user:bfjlc9fp5vn5sa",
-      "grafana.app/updatedTimestamp": "2026-04-22T16:38:13Z"
+      "grafana.app/updatedTimestamp": "2026-04-22T17:41:43Z"
     }
   },
   "spec": {
@@ -214,6 +213,462 @@
             }
           }
         }
+      },
+      "panel-3": {
+        "kind": "Panel",
+        "spec": {
+          "id": 3,
+          "title": "Temperature",
+          "description": "The temperature value for the device",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "influxdb",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "afjlfmb245gqoa"
+                      },
+                      "spec": {
+                        "dataset": "iox",
+                        "editorMode": "builder",
+                        "format": "table",
+                        "rawSql": "SELECT \"temperature\" FROM \"mqtt_consumer\" WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND \"device_id\" = '${selected_device}' ORDER BY \"time\" ASC ",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [
+                                {
+                                  "name": "temperature",
+                                  "type": "functionParameter"
+                                }
+                              ],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "orderBy": {
+                            "property": {
+                              "name": "time",
+                              "type": "string"
+                            },
+                            "type": "property"
+                          },
+                          "orderByDirection": "ASC",
+                          "whereJsonTree": {
+                            "children1": [
+                              {
+                                "id": "9aabaa8b-cdef-4012-b456-719db6438927",
+                                "properties": {
+                                  "field": "device_id",
+                                  "fieldSrc": "field",
+                                  "operator": "equal",
+                                  "value": [
+                                    "${selected_device}"
+                                  ],
+                                  "valueError": [
+                                    null
+                                  ],
+                                  "valueSrc": [
+                                    "value"
+                                  ],
+                                  "valueType": [
+                                    "text"
+                                  ]
+                                },
+                                "type": "rule"
+                              }
+                            ],
+                            "id": "9a8baab8-0123-4456-b89a-b19db63da420",
+                            "type": "group"
+                          },
+                          "whereString": "device_id = '${selected_device}'"
+                        },
+                        "table": "mqtt_consumer"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.0.1",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.3,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "last"
+                  ],
+                  "fields": "/^temperature$/",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "circle",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "celsius",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "fieldMinMax": false
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-4": {
+        "kind": "Panel",
+        "spec": {
+          "id": 4,
+          "title": "Humidity",
+          "description": "The humidity value for the device",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "influxdb",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "afjlfmb245gqoa"
+                      },
+                      "spec": {
+                        "dataset": "iox",
+                        "editorMode": "builder",
+                        "format": "table",
+                        "rawSql": "SELECT \"humiditiy\" FROM \"mqtt_consumer\" WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND \"device_id\" = '${selected_device}' ORDER BY \"time\" ASC ",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [
+                                {
+                                  "name": "humiditiy",
+                                  "type": "functionParameter"
+                                }
+                              ],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "orderBy": {
+                            "property": {
+                              "name": "time",
+                              "type": "string"
+                            },
+                            "type": "property"
+                          },
+                          "orderByDirection": "ASC",
+                          "whereJsonTree": {
+                            "children1": [
+                              {
+                                "id": "9aabaa8b-cdef-4012-b456-719db6438927",
+                                "properties": {
+                                  "field": "device_id",
+                                  "fieldSrc": "field",
+                                  "operator": "equal",
+                                  "value": [
+                                    "${selected_device}"
+                                  ],
+                                  "valueError": [
+                                    null
+                                  ],
+                                  "valueSrc": [
+                                    "value"
+                                  ],
+                                  "valueType": [
+                                    "text"
+                                  ]
+                                },
+                                "type": "rule"
+                              }
+                            ],
+                            "id": "9a8baab8-0123-4456-b89a-b19db63da420",
+                            "type": "group"
+                          },
+                          "whereString": "device_id = '${selected_device}'"
+                        },
+                        "table": "mqtt_consumer"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.0.1",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.3,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "last"
+                  ],
+                  "fields": "/^humiditiy$/",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "circle",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "celsius",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "fieldMinMax": false
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-5": {
+        "kind": "Panel",
+        "spec": {
+          "id": 5,
+          "title": "Light",
+          "description": "The light value for the device",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "influxdb",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "afjlfmb245gqoa"
+                      },
+                      "spec": {
+                        "dataset": "iox",
+                        "editorMode": "builder",
+                        "format": "table",
+                        "rawSql": "SELECT \"light\" FROM \"mqtt_consumer\" WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND \"device_id\" = '${selected_device}' ORDER BY \"time\" ASC ",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [
+                                {
+                                  "name": "light",
+                                  "type": "functionParameter"
+                                }
+                              ],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "orderBy": {
+                            "property": {
+                              "name": "time",
+                              "type": "string"
+                            },
+                            "type": "property"
+                          },
+                          "orderByDirection": "ASC",
+                          "whereJsonTree": {
+                            "children1": [
+                              {
+                                "id": "9aabaa8b-cdef-4012-b456-719db6438927",
+                                "properties": {
+                                  "field": "device_id",
+                                  "fieldSrc": "field",
+                                  "operator": "equal",
+                                  "value": [
+                                    "${selected_device}"
+                                  ],
+                                  "valueError": [
+                                    null
+                                  ],
+                                  "valueSrc": [
+                                    "value"
+                                  ],
+                                  "valueType": [
+                                    "text"
+                                  ]
+                                },
+                                "type": "rule"
+                              }
+                            ],
+                            "id": "9a8baab8-0123-4456-b89a-b19db63da420",
+                            "type": "group"
+                          },
+                          "whereString": "device_id = '${selected_device}'"
+                        },
+                        "table": "mqtt_consumer"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.0.1",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.3,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "last"
+                  ],
+                  "fields": "/^light$/",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "circle",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "celsius",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "fieldMinMax": false
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
       }
     },
     "layout": {
@@ -225,11 +680,50 @@
             "spec": {
               "x": 0,
               "y": 0,
-              "width": 22,
-              "height": 14,
+              "width": 20,
+              "height": 15,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-2"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 20,
+              "y": 0,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-5"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 20,
+              "y": 5,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-3"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 20,
+              "y": 10,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-4"
               }
             }
           }
@@ -242,9 +736,9 @@
     "tags": [],
     "timeSettings": {
       "timezone": "browser",
-      "from": "2026-04-20T19:14:28.966Z",
-      "to": "2026-04-24T08:34:28.966Z",
-      "autoRefresh": "5s",
+      "from": "now-3h",
+      "to": "now",
+      "autoRefresh": "auto",
       "autoRefreshIntervals": [
         "5s",
         "10s",
