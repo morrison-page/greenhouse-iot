@@ -1,0 +1,4 @@
+influxdb
+mosquitto/config/pwfile
+mosquitto/data/
+mosquitto/log/
