@@ -5,8 +5,8 @@
     "name": "adkm25w",
     "namespace": "default",
     "uid": "398dff0d-8576-472d-a1f4-36b7f06ff2a2",
-    "resourceVersion": "1776879703178992",
-    "generation": 16,
+    "resourceVersion": "1777234445047009",
+    "generation": 22,
     "creationTimestamp": "2026-04-22T15:49:43Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "2345540785037312"
@@ -16,7 +16,7 @@
       "grafana.app/folder": "",
       "grafana.app/saved-from-ui": "Grafana v13.0.1 (a100054f)",
       "grafana.app/updatedBy": "user:bfjlc9fp5vn5sa",
-      "grafana.app/updatedTimestamp": "2026-04-22T17:41:43Z"
+      "grafana.app/updatedTimestamp": "2026-04-26T20:14:05Z"
     }
   },
   "spec": {
@@ -48,7 +48,7 @@
         "kind": "Panel",
         "spec": {
           "id": 2,
-          "title": "New Panel",
+          "title": "Device Metrics",
           "description": "",
           "links": [],
           "data": {
@@ -391,13 +391,13 @@
                         "dataset": "iox",
                         "editorMode": "builder",
                         "format": "table",
-                        "rawSql": "SELECT \"humiditiy\" FROM \"mqtt_consumer\" WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND \"device_id\" = '${selected_device}' ORDER BY \"time\" ASC ",
+                        "rawSql": "SELECT \"humidity\" FROM \"mqtt_consumer\" WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND \"device_id\" = '${selected_device}' ORDER BY \"time\" ASC ",
                         "sql": {
                           "columns": [
                             {
                               "parameters": [
                                 {
-                                  "name": "humiditiy",
+                                  "name": "humidity",
                                   "type": "functionParameter"
                                 }
                               ],
@@ -482,7 +482,7 @@
                   "calcs": [
                     "last"
                   ],
-                  "fields": "/^humiditiy$/",
+                  "fields": "/^humidity$/",
                   "values": false
                 },
                 "segmentCount": 1,
@@ -496,7 +496,7 @@
               },
               "fieldConfig": {
                 "defaults": {
-                  "unit": "celsius",
+                  "unit": "percent",
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -648,7 +648,7 @@
               },
               "fieldConfig": {
                 "defaults": {
-                  "unit": "celsius",
+                  "unit": "percent",
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -736,7 +736,7 @@
     "tags": [],
     "timeSettings": {
       "timezone": "browser",
-      "from": "now-3h",
+      "from": "now-5m",
       "to": "now",
       "autoRefresh": "auto",
       "autoRefreshIntervals": [
@@ -761,8 +761,8 @@
         "spec": {
           "name": "selected_device",
           "current": {
-            "text": "001",
-            "value": "001"
+            "text": "A4739D3B015C",
+            "value": "A4739D3B015C"
           },
           "label": "Selected Device",
           "hide": "dontHide",
