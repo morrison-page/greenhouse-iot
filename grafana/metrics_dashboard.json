@@ -5,8 +5,8 @@
     "name": "adkm25w",
     "namespace": "default",
     "uid": "1c7ac4e4-e92e-4df6-a915-088377545894",
-    "resourceVersion": "1777418472548009",
-    "generation": 5,
+    "resourceVersion": "1777418535835012",
+    "generation": 6,
     "creationTimestamp": "2026-04-28T23:18:20Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "129166415163392"
@@ -16,7 +16,7 @@
       "grafana.app/folder": "",
       "grafana.app/saved-from-ui": "Grafana v13.0.1 (a100054f)",
       "grafana.app/updatedBy": "user:bfjlc9fp5vn5sa",
-      "grafana.app/updatedTimestamp": "2026-04-28T23:21:12Z"
+      "grafana.app/updatedTimestamp": "2026-04-28T23:22:15Z"
     }
   },
   "spec": {
@@ -259,7 +259,23 @@
                     }
                   }
                 },
-                "overrides": []
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "humidity"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "red",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
               }
             }
           }
