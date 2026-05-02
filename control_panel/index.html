@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greenhouse Control Panel</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<script>
+  (function() {
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const useDark = saved === 'dark' || (!saved && prefersDark);
+    document.documentElement.setAttribute('data-theme', useDark ? 'dark' : 'light');
+  })();
+</script>
+<div class="topbar">
+  <h1>Greenhouse Control Panel</h1>
+  <label class="theme-toggle" title="Toggle dark mode">
+    <span class="icon">☀︎</span>
+    <input type="checkbox" class="toggle-input" id="theme-switch" onchange="toggleTheme(this)" />
+    <span class="toggle-track"></span>
+    <span class="icon">☽</span>
+  </label>
+</div>
+
+<!-- Control Sending Buttons -->
+<div class="card" style="margin-bottom:1.25rem">
+  <h2 style="margin-bottom:.9rem">Send Controls</h2>
+  <div class="grid-3" id="action-grid">
+    <div style="grid-column:1 / -1;margin-bottom:.5rem;display:flex;gap:.5rem;align-items:center">
+      <label style="font-size:.9rem">Device ID:</label>
+      <input id="device-id" placeholder="A4739D3B015C" style="flex:1;padding:.35rem;border-radius:4px;border:1px solid #ccc" />
+    </div>
+    <button class="mqtt-btn" disabled data-control="mode" data-state="LOCAL" onclick="mqttSend(this)">
+      <span class="btn-label">🤖 Ctrl Mode - LOCAL</span>
+    </button>
+    <button class="mqtt-btn" disabled data-control="lights" data-state="OFF" onclick="mqttSend(this)">
+      <span class="btn-label">💡 Lights - OFF</span>
+    </button>
+    <button class="mqtt-btn" disabled data-control="heating" data-state="OFF" onclick="mqttSend(this)">
+      <span class="btn-label">🔥 Heating - OFF</span>
+    </button>
+    <button class="mqtt-btn" disabled data-control="ventilation" data-state="OFF" onclick="mqttSend(this)">
+      <span class="btn-label">❄️ Ventilation - OFF</span>
+    </button>
+    <button class="mqtt-btn" disabled data-control="irrigation" data-state="OFF" onclick="mqttSend(this)">
+      <span class="btn-label">🌱 Irrigation - OFF</span>
+    </button>
+  </div>
+</div>
+
+<!-- Log -->
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
+    <h2 style="margin-bottom:0">Log</h2>
+    <button class="btn-ghost" style="font-size:.78rem;padding:.2rem .6rem" onclick="clearLog()">Clear</button>
+  </div>
+  <div id="log"><span class="log-dim">- waiting for connection -</span></div>
+</div>
+
+<script src="control_panel.js"></script>
+</body>
+</html>

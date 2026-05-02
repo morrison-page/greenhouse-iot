@@ -59,6 +59,16 @@ services:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
     networks:
       - greenhouse-network
+  control-panel:
+    build:
+      context: ./control_panel
+      dockerfile: Dockerfile
+    container_name: control-panel
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    networks:
+      - greenhouse-network
 volumes:
   grafana-storage:
 networks:
