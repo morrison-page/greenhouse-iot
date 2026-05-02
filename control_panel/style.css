@@ -143,6 +143,42 @@ h2 { font-size: .85rem; font-weight: 600; text-transform: uppercase;
     gap: .75rem;
 }
 
+.device-id-row {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.device-id-row label {
+    font-size: .9rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.device-id-row input {
+    flex: 1;
+    padding: .5rem .75rem;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: .875rem;
+    transition: background .2s, border-color .2s, color .2s;
+}
+
+.device-id-row input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.device-id-row input::placeholder {
+    color: var(--muted);
+    opacity: 0.6;
+}
+
 .card {
     background: var(--surface);
     border: 1px solid var(--border);

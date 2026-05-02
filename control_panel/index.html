@@ -30,9 +30,9 @@
 <div class="card" style="margin-bottom:1.25rem">
   <h2 style="margin-bottom:.9rem">Send Controls</h2>
   <div class="grid-3" id="action-grid">
-    <div style="grid-column:1 / -1;margin-bottom:.5rem;display:flex;gap:.5rem;align-items:center">
-      <label style="font-size:.9rem">Device ID:</label>
-      <input id="device-id" placeholder="A4739D3B015C" style="flex:1;padding:.35rem;border-radius:4px;border:1px solid #ccc" />
+    <div class="device-id-row">
+      <label for="device-id">Device ID:</label>
+      <input id="device-id" type="text" placeholder="A4739D3B015C" />
     </div>
     <button class="mqtt-btn" disabled data-control="mode" data-state="LOCAL" onclick="mqttSend(this)">
       <span class="btn-label">🤖 Ctrl Mode - LOCAL</span>
