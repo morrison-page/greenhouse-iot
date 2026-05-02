@@ -61,8 +61,12 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     padding: 1.5rem;
+    gap: 1.25rem;
+    overflow: hidden;
     transition: background .2s, color .2s;
 }
 
@@ -74,7 +78,8 @@ h2 { font-size: .85rem; font-weight: 600; text-transform: uppercase;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
 }
 .topbar h1 { margin-bottom: 0; }
 
@@ -145,6 +150,22 @@ h2 { font-size: .85rem; font-weight: 600; text-transform: uppercase;
     padding: 1.1rem 1.25rem;
     box-shadow: var(--shadow);
     transition: background .2s, border-color .2s;
+}
+
+.card:first-of-type {
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+.card:last-of-type {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.card:last-of-type > div:not(#log) {
+    flex-shrink: 0;
 }
 
 /* .conn-bar {
@@ -245,9 +266,10 @@ button:active { transform: scale(.97); }
     color: #c9cdd8;
     border-radius: 7px;
     padding: .9rem 1rem;
-    max-height: 180px;
+    flex: 1;
     overflow-y: auto;
     line-height: 1.65;
+    min-height: 0;
 }
 #log .log-ok   { color: #34d399; }
 #log .log-err  { color: #f87171; }
